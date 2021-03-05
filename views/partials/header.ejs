@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>XMeme</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <%# Main page container %>
+        <div id="page-container">
+            <%# Main content container %>
+                <div id="content-wrap">
+                    <%# Navbar %>
+                        <nav id="mainNavbar" class="nav navbar navbar-expand-lg navbar-dark bg-danger">
+                            <div class="container-fluid ml-5 mr-5">
+                                <a href="/" class="navbar-brand logo">XMEME</a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav ml-auto">
+                                        <%# Swagger button %>
+                                            <li class="nav-item mr-4">
+                                                <a class="nav-link" href="http://localhost:8080/swagger-ui/">Swagger</a>
+                                            </li>
+                                            <%# Contact button %>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="https://ashkrjha.netlify.app">Contact</a>
+                                                </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>

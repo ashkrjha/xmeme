@@ -1,0 +1,43 @@
+<%- include("./partials/header"); -%>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-sm-7 col-md-6 col-lg-5">
+                <div class="card shadow border-0">
+                    <div class="card-body">
+                        <%# Card header %>
+                            <h1 class="text-center mb-5">EDIT DETAILS</h1>
+                            <%# Form to enter the details %>
+                                <form class="needs-validation" action="/<%= result[0].id %>/edit?_method=PATCH"
+                                    method="POST">
+                                    <%# Enter caption %>
+                                        <div class="form-group">
+                                            <label for="img_caption">Caption:</label>
+                                            <input type="text" id="img_caption" name="caption"
+                                                value="<%= result[0].caption %>" required>
+                                            <div class="invalid-feedback">
+                                                Enter the caption.
+                                            </div>
+                                        </div>
+                                        <%# Enter url %>
+                                            <div class="form-group">
+                                                <label for="img_url">URL:</label><br>
+                                                <input type="text" id="img_url" name="url" value="<%= result[0].url %>"
+                                                    required>
+                                                <div class="invalid-feedback">
+                                                    Enter the url.
+                                                </div>
+                                            </div>
+                                            <%# Submit button %>
+                                                <button type="submit" class="btn btn-danger btn-block">Save
+                                                    changes</button>
+                                </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col"> </div>
+        </div>
+
+    </div>
+    <%- include("./partials/footer"); -%>

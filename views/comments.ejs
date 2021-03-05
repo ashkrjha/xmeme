@@ -1,0 +1,60 @@
+<%- include("./partials/header"); -%>
+
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-sm-8 col-md-7 col-lg-6">
+                <div class="card shadow border-0">
+                    <%# Card for comments %>
+                        <div class="card-body">
+                            <%# Card head text %>
+                                <h1 class="text-center mb-5">COMMENTS</h1>
+                                <%# If there are comments %>
+                                    <% if(result.length>0) {%>
+                                        <div class="ml-1">
+                                            <%# Run a forEach loop for every comment %>
+                                                <% result.forEach(function(comment) { %>
+                                                    <div class="row justify-content-between">
+                                                        <div class="col col-lg-10">
+                                                            <p>
+                                                                <%= comment.cmnt %>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    <% }) %>
+                                        </div>
+                                        <% }%>
+                                            <%# If there are no comments %>
+                                                <%if(result.length==0) {%>
+                                                    <div class="vertical-center">
+                                                        <h5>No comments yet ...</h5>
+                                                    </div>
+                                                    <%}%>
+                                                        <%# Form to enter a comment %>
+                                                            <form class="needs-validation" action="<%= id %>/comments"
+                                                                method="POST">
+                                                                <div
+                                                                    class="row justify-content-around align-items-center">
+                                                                    <div class="col col-lg-9">
+                                                                        <input type="text" placeholder="Enter a comment"
+                                                                            name="comment" required>
+                                                                        <div class="invalid-feedback">
+                                                                            Enter a comment.
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col col-lg-3">
+                                                                        <button type="submit" id="commentButton"
+                                                                            class="btn btn-lgnpm install swagger-jsdoc swagger-ui-express btn-success mr-5">Post
+                                                                            comment</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                        </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+
+    <%- include("./partials/footer"); -%>

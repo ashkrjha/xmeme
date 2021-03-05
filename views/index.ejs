@@ -1,0 +1,268 @@
+<%- include("./partials/header"); -%>
+    <%# If this is a favorite page %>
+        <% if(favoritePage) {%>
+            <div class="mt-5 mb-5">
+                <h1 class="text-white">Your Favorite Memes Are:
+                </h1>
+            </div>
+            <% } %>
+                <%# If this is not a favorite and userMemes page %>
+                    <% if(!favoritePage && !userMemes) {%>
+                        <div class="mt-5 mb-5" id="topContainer">
+                            <div class="row justify-content-between">
+                                <div class="col col-lg-2">
+                                    <%# Button to open the form to post meme %>
+                                        <span id="main">
+                                            <button class="openbtn btn btn-lg btn-info" onclick="openNav()">&#9776; POST
+                                                A
+                                                MEME!</button>
+                                        </span>
+                                </div>
+                                <%# Searchbar to search memes by owner %>
+                                    <div class="col col-lg-8">
+                                        <span>
+                                            <form class="needs-validation" action="/user" method="POST">
+                                                <input type="text" placeholder="Search meme by user's name"
+                                                    id="searchbar" name="user" required>
+                                                <div class="invalid-feedback">
+                                                    Enter the user's name.
+                                                </div>
+                                                <button type="submit" class="btn btn-lg btn-success ml-3"
+                                                    id="searchbtn">Search</button>
+                                            </form>
+                                        </span>
+                                    </div>
+                            </div>
+                            <br>
+                            <div class="row justify-content-end">
+                                <%# Button to get most liked memes %>
+                                    <div class="col pt-2 pb-2 ml-2 col-lg-1">
+                                        <form action="/sortbylikes" method="GET">
+                                            <button class="btn btn-xs btn-warning">Most Liked</button>
+                                        </form>
+                                    </div>
+                                    <%# Button to get most disliked memes %>
+                                        <div class="col pt-2 pb-2 col-lg-2">
+                                            <form action="/sortbydislikes" method="GET">
+                                                <button class="btn btn-xs btn-warning">Most Disliked</button>
+                                            </form>
+                                        </div>
+                                        <%# Button to get favorite memes %>
+                                            <div class="col pt-2 pb-2 col-lg-1">
+                                                <form action="/favorite" method="GET">
+                                                    <button class="btn btn-xs btn-danger">Favorites</button>
+                                                </form>
+                                            </div>
+                            </div>
+                        </div>
+
+                        <%# Sidebar form to post a meme %>
+                            <div id="mySidebar" class="sidebar">
+                                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                                <div class="login-form">
+                                    <div class="container">
+                                        <%# Header of the form %>
+                                            <h1 class="text-center form-head">POST A MEME!</h1>
+                                            <form class="needs-validation" action="/" method="POST">
+                                                <%# Name input %>
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Enter your Name" name="name"
+                                                            maxlength="20" required>
+                                                        <div class="invalid-feedback">
+                                                            Enter your name (max 20 characters)
+                                                        </div>
+                                                    </div>
+                                                    <%# Caption input %>
+                                                        <div class="form-group">
+                                                            <input type="text" placeholder="Enter the caption"
+                                                                name="caption" maxlength="120" required>
+                                                            <div class="invalid-feedback">
+                                                                Enter the caption (max 120 characters)
+                                                            </div>
+                                                        </div>
+                                                        <%# URL input %>
+                                                            <div class="form-group">
+                                                                <input type="text" placeholder="Enter the url"
+                                                                    name="url_img" maxlength="2000" required>
+                                                                <div class="invalid-feedback">
+                                                                    Enter the url (max 2000 characters)
+                                                                </div>
+                                                            </div>
+                                                            <%# Button to submit the form %>
+                                                                <button type="submit"
+                                                                    class="btn btn-lg btn-danger text-center">POST!</button>
+                                            </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                                <%# If there are memes in the table %>
+                                    <% if(result.length>0) {%>
+                                        <%# If this is a userMemes page %>
+                                            <% if(userMemes) {%>
+                                                <div class="mt-5 mb-5">
+                                                    <h1 class="text-white">Memes by <%= result[0].name %>
+                                                    </h1>
+                                                </div>
+                                                <% } %>
+                                                    <%# mainContainer which contains the memes %>
+                                                        <div id="mainContainer">
+                                                            <div class="row justify-content-around">
+                                                                <%# forEach loop to show all the memes %>
+                                                                    <% result.forEach(function(meme) { %>
+                                                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                                                            <div class="card indexCards shadow border-0 mt-5 mb-5 mr-2 ml-2"
+                                                                                id="memeCard">
+                                                                                <%# meme image %>
+                                                                                    <img id="cardimg"
+                                                                                        class="card-img-top"
+                                                                                        src="<%= meme.url %>"
+                                                                                        alt="No image found"></a>
+                                                                                    <div class="card-body">
+                                                                                        <%# meme caption %>
+                                                                                            <h5
+                                                                                                class="card-title text-capitalize">
+                                                                                                <%= meme.caption %>
+                                                                                            </h5>
+                                                                                            <%# meme owner %>
+                                                                                                <h6
+                                                                                                    class="card-subtitle">
+                                                                                                    <%=meme.name%>
+                                                                                                </h6>
+                                                                                                <br>
+                                                                                                <%# date of posting the
+                                                                                                    meme %>
+                                                                                                    <p>
+                                                                                                        Posted on:<br>
+                                                                                                        <%=meme.posted_time%>
+                                                                                                    </p>
+                                                                                    </div>
+                                                                                    <%# row for likes and dislikes %>
+                                                                                        <div
+                                                                                            class="row justify-content-around ml-1 mr-1">
+                                                                                            <div
+                                                                                                class="col col-lg-4 border border-success pb-1">
+                                                                                                <form
+                                                                                                    action="/<%=meme.id%>/likes"
+                                                                                                    method="POST">
+                                                                                                    <%# like button %>
+                                                                                                        <button
+                                                                                                            class="btn btn-xs btn-success mt-1"><i
+                                                                                                                class="fas fa-thumbs-up"></i></button>
+                                                                                                        <span
+                                                                                                            class="text-center font-weight-bold ml-1 pt-4">
+                                                                                                            <%= meme.likes
+                                                                                                                %>
+                                                                                                        </span>
+                                                                                                </form>
+
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="col col-lg-4 border border-danger mr-1 pb-1">
+                                                                                                <form
+                                                                                                    action="/<%=meme.id%>/dislikes"
+                                                                                                    method="POST">
+                                                                                                    <%# dislike button
+                                                                                                        %>
+                                                                                                        <button
+                                                                                                            class="btn btn-xs btn-danger mt-1"><i
+                                                                                                                class="fas fa-thumbs-down"></i></button>
+                                                                                                        <span
+                                                                                                            class="text-center font-weight-bold ml-1 pt-4">
+                                                                                                            <%= meme.dislikes
+                                                                                                                %>
+                                                                                                        </span>
+                                                                                                </form>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <br>
+                                                                                        <div class="row ml-1">
+                                                                                            <div class="col col-lg-2">
+                                                                                                <%# favorite button %>
+                                                                                                    <%# If the meme is
+                                                                                                        favorited %>
+                                                                                                        <% if(meme.favorite)
+                                                                                                            {%>
+                                                                                                            <form
+                                                                                                                action="/<%=meme.id%>/favorite"
+                                                                                                                method="POST">
+                                                                                                                <button
+                                                                                                                    onclick="heart()"
+                                                                                                                    id="heart"
+                                                                                                                    class="btn btn-xs mb-2"><i
+                                                                                                                        class="fas fa-heart"></i></button>
+                                                                                                            </form>
+                                                                                                            <% }%>
+                                                                                                                <%# If
+                                                                                                                    the
+                                                                                                                    meme
+                                                                                                                    is
+                                                                                                                    not
+                                                                                                                    favorited
+                                                                                                                    %>
+                                                                                                                    <% if(!meme.favorite)
+                                                                                                                        {%>
+                                                                                                                        <form
+                                                                                                                            action="/<%=meme.id%>/favorite"
+                                                                                                                            method="POST">
+                                                                                                                            <button
+                                                                                                                                onclick="heart()"
+                                                                                                                                id="heart"
+                                                                                                                                class="btn btn-xs mb-2"><i
+                                                                                                                                    class="far fa-heart"></i></button>
+                                                                                                                        </form>
+                                                                                                                        <%
+                                                                                                                            }%>
+                                                                                            </div>
+                                                                                            <%# Delete button for meme
+                                                                                                %>
+                                                                                                <div
+                                                                                                    class="col col-lg-2">
+                                                                                                    <form
+                                                                                                        action="/<%=meme.id%>/delete"
+                                                                                                        method="POST">
+                                                                                                        <button
+                                                                                                            class="btn btn-xs btn-danger mb-2"><i
+                                                                                                                class="fas fa-trash-alt"></i></button>
+                                                                                                    </form>
+                                                                                                </div>
+                                                                                                <%# Edit button for meme
+                                                                                                    %>
+                                                                                                    <div
+                                                                                                        class="col col-lg-2">
+                                                                                                        <form
+                                                                                                            action="/<%=meme.id%>/edit"
+                                                                                                            method="GET">
+                                                                                                            <button
+                                                                                                                class="btn btn-xs btn-danger mb-2"><i
+                                                                                                                    class="fas fa-edit"></i></button>
+                                                                                                        </form>
+                                                                                                    </div>
+                                                                                                    <%# Comments button
+                                                                                                        for memes %>
+                                                                                                        <div
+                                                                                                            class="col col-lg-6">
+                                                                                                            <form
+                                                                                                                action="/<%=meme.id%>/comments"
+                                                                                                                method="GET">
+                                                                                                                <button
+                                                                                                                    class="btn btn-xs btn-success mb-2">Comments</button>
+                                                                                                            </form>
+                                                                                                        </div>
+                                                                                        </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <% }) %>
+                                                            </div>
+                                                        </div>
+                                                        <% }%>
+                                                            <%# If there are no memes %>
+                                                                <%if(result.length==0) {%>
+
+                                                                    <div class="mt-5 mb-5">
+                                                                        <h1 class="text-white">No memes posted yet...
+                                                                        </h1>
+                                                                    </div>
+                                                                    <%}%>
+
+                                                                        <%- include("./partials/footer"); -%>
