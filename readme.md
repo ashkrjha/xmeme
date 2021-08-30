@@ -6,7 +6,7 @@ Front-end link: https://xmeme-app.herokuapp.com/<br />
 Back-end link:  https://xmeme-app.herokuapp.com/ (Both of them are same because ejs files being rendered in the app using nodejs)<br/>
 
 Tech stack used:<br/>
-    Front-end: EJS, CSS3, Bootstrap, JavaScript, AJAX<br/>
+    Front-end: EJS, CSS3, Bootstrap, JavaScript<br/>
     Back-end:  Nodejs, Express<br/>
     Database:  MySQL<br/>
 
